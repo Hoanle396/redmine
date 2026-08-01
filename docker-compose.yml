@@ -1,5 +1,5 @@
 services:
-  db:
+  db-redmine:
     image: postgres:16-alpine
     container_name: redmine-db
     restart: unless-stopped
@@ -15,17 +15,17 @@ services:
       timeout: 5s
       retries: 5
 
-  redmine:
+  redmine-app:
     image: redmine:latest
-    container_name: redmine
+    container_name: redmine-app
     restart: unless-stopped
     depends_on:
-      db:
+      db-redmine:
         condition: service_healthy
     ports:
       - "${REDMINE_PORT:-3000}:3000"
     environment:
-      REDMINE_DB_POSTGRES: db
+      REDMINE_DB_POSTGRES: db-redmine
       REDMINE_DB_PORT: 5432
       REDMINE_DB_DATABASE: ${POSTGRES_DB:-redmine}
       REDMINE_DB_USERNAME: ${POSTGRES_USER:-redmine}
