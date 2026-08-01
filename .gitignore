@@ -1,0 +1,29 @@
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Redmine plugins & themes (installed per-deployment)
+/plugins/*
+!/plugins/.gitkeep
+/themes/*
+!/themes/.gitkeep
+
+# Redmine runtime data
+/files/
+/log/
+*.log
+/tmp/
+/backups/
+
+# Local compose overrides
+docker-compose.override.yml
+docker-compose.*.local.yml
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*~
